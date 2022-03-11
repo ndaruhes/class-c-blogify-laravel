@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Home | Blogify')
-
+@section('title', 'Dashboard | Blogify')
 
 @section('content')
-    <h1>Apa kbar</h1>
+<h1>Halo {{ Auth::user()->name }}</h1>
+<h2>Kamu adalah {{ Auth::user()->role }}</h2>
 @endsection

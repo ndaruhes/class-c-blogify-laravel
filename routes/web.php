@@ -14,11 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('index');
 });
 
-Route::get('/login', 'App\Http\Controllers\AuthController@showLogin')->middleware('guest');
-Route::get('/register', 'App\Http\Controllers\AuthController@showRegister')->middleware('guest');
-Route::post('/register', 'App\Http\Controllers\AuthController@prosesRegister')->middleware('guest');
-Route::post('/login', 'App\Http\Controllers\AuthController@prosesLogin')->middleware('guest');
-Route::post('/logout', 'App\Http\Controllers\AuthController@prosesLogout');
+Auth::routes();
+
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    // AUTH ROUTES
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    // ROLEADMIN ROUTES
+    Route::group(['middleware' => 'RoleAdmin'], function () {
+        Route::get('/admin', 'HomeController@admin');
+    });
+
+    // ROLEMEMBER ROUTES
+    Route::group(['middleware' => 'RoleMember'], function () {
+        Route::get('/member', 'HomeController@member');
+    });
+});
