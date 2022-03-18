@@ -22,15 +22,24 @@
                         <a class="nav-link" href="{{ url('/login') }}"><i class="uil uil-user me-1"></i>Login</a>
                     </li>
                 @else
+                    @if (Auth::user()->role == 'Admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/categories') }}"><i
+                                    class="uil uil-paperclip me-1"></i>Manage
+                                Categories</a>
+                        </li>
+                    @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="uil uil-user me-1"></i>
                             Hi, {{ Auth::user()->username }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
                             <li>
-                                <a class="dropdown-item" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                                <a class="dropdown-item" href=""
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                                     Logout
                                 </a>
                                 <form id="logout-form" action="{{ url('/logout') }}" method="POST">

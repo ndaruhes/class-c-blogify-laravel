@@ -26,6 +26,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // ROLEADMIN ROUTES
     Route::group(['middleware' => 'RoleAdmin'], function () {
         Route::get('/admin', 'HomeController@admin');
+
+        // Categories Routes
+        Route::get('/categories', 'CategoryController@index')->name('indexCategory');
+        Route::post('/categories', 'CategoryController@store')->name('storeCategory');
+        Route::get('/categories/edit/{id}', 'CategoryController@edit')->name('editCategory');
+        Route::put('/categories/edit/{id}', 'CategoryController@update')->name('updateCategory');
+        Route::delete('/categories/delete/{id}', 'CategoryController@destroy')->name('deleteCategory');
     });
 
     // ROLEMEMBER ROUTES
