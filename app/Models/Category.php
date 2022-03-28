@@ -15,4 +15,10 @@ class Category extends Model
 
     // Menentukan field yg tidak boleh dimasukkan ke dalam table
     // protected $guarded = ['id'];
+
+
+    // RELATIONSHIP
+    public function blog(){
+        return $this->hasMany('App\Models\Blog', 'category_id');
+    }
 }

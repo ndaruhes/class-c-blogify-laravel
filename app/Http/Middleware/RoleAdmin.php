@@ -10,12 +10,14 @@ class RoleAdmin
     public function handle(Request $request, Closure $next)
     {
         $user = $request->user();
-        if ($user) {
-            if ($user->role == 'Admin') {
-                return $next($request);
-            }
-        }
+        return ($user && $user->role == 'Admin') ? $next($request) : redirect('/');
 
-        return redirect('/');
+
+        // if ($user) {
+        //     if ($user->role == 'Admin') {
+        //         return $next($request);
+        //     }
+        // }
+        // return redirect('/');
     }
 }
