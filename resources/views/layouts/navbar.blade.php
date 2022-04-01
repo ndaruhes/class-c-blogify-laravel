@@ -22,17 +22,17 @@
                         <a class="nav-link" href="{{ url('/login') }}"><i class="uil uil-user me-1"></i>Login</a>
                     </li>
                 @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/blog') }}">
+                            <i class="uil uil-apps me-1"></i>
+                            Manage Blog
+                        </a>
+                    </li>
                     @if (Auth::user()->role == 'Admin')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/categories') }}">
                                 <i class="uil uil-paperclip me-1"></i>
                                 Manage Categories
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/blog') }}">
-                                <i class="uil uil-apps me-1"></i>
-                                Manage Blog
                             </a>
                         </li>
                     @endif

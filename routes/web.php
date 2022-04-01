@@ -13,13 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
 Auth::routes();
 
+
+
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    Route::get('/', 'PageController@index');
+
+    // BLOG ROUTES
+    Route::get('/blog', 'BlogController@index')->name('indexBlog');
+    Route::delete('/blog/delete/{id}', 'BlogController@destroy')->name('deleteBlog');
+
     // AUTH ROUTES
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -33,17 +37,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/categories/edit/{id}', 'CategoryController@edit')->name('editCategory');
         Route::put('/categories/edit/{id}', 'CategoryController@update')->name('updateCategory');
         Route::delete('/categories/delete/{id}', 'CategoryController@destroy')->name('deleteCategory');
-
-        // 2. Blog Routes
-        Route::get('/blog', 'BlogController@index')->name('indexBlog');
-        Route::post('/blog', 'BlogController@store')->name('storeBlog');
-        Route::get('/blog/edit/{id}', 'BlogController@edit')->name('editBlog');
-        Route::put('/blog/edit/{id}', 'BlogController@update')->name('updateBlog');
-        Route::delete('/blog/delete/{id}', 'BlogController@destroy')->name('deleteBlog');
     });
 
     // ROLEMEMBER ROUTES
     Route::group(['middleware' => 'RoleMember'], function () {
         Route::get('/member', 'HomeController@member');
+        Route::post('/blog', 'BlogController@store')->name('storeBlog');
+        Route::get('/blog/edit/{id}', 'BlogController@edit')->name('editBlog');
+        Route::put('/blog/edit/{id}', 'BlogController@update')->name('updateBlog');
     });
 });

@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('storeBlog') }}" method="POST">
+                <form action="{{ route('storeBlog') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label>Thumbnail Blog</label>
@@ -26,12 +26,12 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label>Deskripsi Blog</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Judul Blog..." name="description"
+                        <label>Konten Blog</label>
+                        <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Konten Blog..." name="content"
                             rows="5">
-                        {{ old('description') }}
+                        {{ old('content') }}
                     </textarea>
-                        @error('description')
+                        @error('content')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>

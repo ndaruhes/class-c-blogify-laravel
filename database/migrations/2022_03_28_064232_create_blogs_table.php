@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('thumbnail');
             $table->string('title');
-            $table->string('description');
+            $table->string('content');
             $table->integer('category_id');
             $table->integer('user_id');
+            $table->enum('status', ['Pending', 'Accepted']);
             $table->timestamps();
         });
     }
